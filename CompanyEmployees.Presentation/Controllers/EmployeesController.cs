@@ -1,0 +1,18 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using Service.Contracts;
+
+namespace CompanyEmployees.Presentation.Controllers;
+
+[Route("api/companies/{companyId}/employees")]
+[ApiController]
+public class EmployeesController(IServiceManager service) : ControllerBase
+{
+    private readonly IServiceManager _service = service;
+
+    [HttpGet]
+    public IActionResult GetEmployeesForCompany(Guid companyId)
+    {
+        var employees = _service.EmployeeService.GetEmployees(companyId,false);
+        return Ok(employees);
+    }
+}
