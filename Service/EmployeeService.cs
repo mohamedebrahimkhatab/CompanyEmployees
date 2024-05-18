@@ -12,6 +12,20 @@ internal sealed class EmployeeService(IRepositoryManager repository, ILoggerMana
     private readonly ILoggerManager _logger = logger;
     private readonly IMapper _mapper = mapper;
 
+    public EmployeeDto GetEmployee(Guid companyId, Guid id, bool trackChanges)
+    {
+        var company = _repository.Company.GetCompany(companyId, trackChanges);
+        if(company is null)
+            throw new CompanyNotFoundException(companyId);
+
+        var employee = _repository.Employee.GetEmployee(companyId, id, trackChanges);
+        if (employee is null)
+            throw new EmployeeNotFoundException(id);
+
+        var dto = _mapper.Map<EmployeeDto>(employee);
+        return dto;
+    }
+
     public IEnumerable<EmployeeDto> GetEmployees(Guid companyId, bool trackChanges)
     {
         var company = _repository.Company.GetCompany(companyId, trackChanges);
