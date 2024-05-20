@@ -13,6 +13,7 @@ internal sealed class CompanyService(IRepositoryManager repository, ILoggerManag
     private readonly ILoggerManager _logger = logger;
     private readonly IMapper _mapper = mapper;
 
+
     public IEnumerable<CompanyDto> GetAllCompanies(bool trackChanges)
     {
 		var companies = _repository.Company.GetAllCompanies(trackChanges);
@@ -30,5 +31,14 @@ internal sealed class CompanyService(IRepositoryManager repository, ILoggerManag
 
         var companyDto = _mapper.Map<CompanyDto>(company);
         return companyDto;
+    }
+
+    public CompanyDto CreateCompany(CompanyForCreationDto company)
+    {
+        var companyEntity = _mapper.Map<Company>(company);
+        _repository.Company.CreateCompany(companyEntity);
+        _repository.Save();
+        var companyToReturn = _mapper.Map<CompanyDto>(companyEntity);
+        return companyToReturn;
     }
 }

@@ -2,6 +2,7 @@ using CompanyEmployees.Extensions;
 using CompanyEmployees.Presentation;
 using Contracts;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Mvc;
 using NLog;
 
 var builder = WebApplication.CreateBuilder(args);
