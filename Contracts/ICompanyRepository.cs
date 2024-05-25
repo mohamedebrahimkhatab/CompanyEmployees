@@ -8,4 +8,5 @@ public interface ICompanyRepository
     IEnumerable<Company> GetByIds(IEnumerable<Guid> ids, bool trackChanges);
     Company? GetCompany(Guid companyId, bool trackChanges);
     void CreateCompany(Company company);
+    void DeleteCompany(Company company);
 }

@@ -12,4 +12,6 @@ public class CompanyRepository(RepositoryContext repositoryContext) : Repository
     public Company? GetCompany(Guid companyId, bool trackChanges) => FindByCondition(e => e.Id.Equals(companyId), trackChanges).FirstOrDefault();
 
     public void CreateCompany(Company company) => Create(company);
+
+    public void DeleteCompany(Company company) => Delete(company);
 }
