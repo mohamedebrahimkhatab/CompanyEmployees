@@ -10,8 +10,10 @@ public class MappingProfile : Profile
     {
         CreateMap<Company, CompanyDto>().ForMember(e => e.FullAddress, opt => opt.MapFrom(x => x.Address + ", " + x.Country));
         CreateMap<CompanyForCreationDto, Company>();
+        CreateMap<CompanyForUpdateDto, Company>();
 
         CreateMap<Employee, EmployeeDto>();
         CreateMap<EmployeeForCreationDto, Employee>();
+        CreateMap<EmployeeForUpdateDto, Employee>();
     }
 }

@@ -57,4 +57,15 @@ public class CompaniesController(IServiceManager service) : ControllerBase
         _service.CompanyService.DeleteCompany(id, false);
         return NoContent();
     }
+
+    [HttpPut("{id:guid}")]
+    public IActionResult UpadateCompany(Guid id, [FromBody] CompanyForUpdateDto company)
+    {
+        if(company is null)
+            return BadRequest("CompanyForUpdateDto object is null");
+
+        _service.CompanyService.UpdateCompany(id, company, true);
+
+        return NoContent();
+    }
 }
